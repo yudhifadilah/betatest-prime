@@ -1,4 +1,4 @@
-const sequelize = require('../config/database');
+const sequelize = require('../config/localdatabase');
 
 const User = require('./User');
 const VilogProduk = require('./VilogProduk');

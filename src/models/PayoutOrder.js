@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+const sequelize = require('../config/localdatabase');
 
 const PayoutOrder = sequelize.define('PayoutOrder', {
   orderId: { type: DataTypes.STRING, unique: true },

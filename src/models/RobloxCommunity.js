@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+const sequelize = require('../config/localdatabase');
 
 const RobloxCommunity = sequelize.define('RobloxCommunity', {
   groupId: { type: DataTypes.STRING, allowNull: false, unique: true },

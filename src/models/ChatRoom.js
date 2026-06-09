@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+const sequelize = require('../config/localdatabase');
 
 const ChatRoom = sequelize.define('ChatRoom', {
   orderId: { type: DataTypes.STRING, allowNull: false },

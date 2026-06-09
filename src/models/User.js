@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+const sequelize = require('../config/localdatabase');
 
 const User = sequelize.define('User', {
   name: { type: DataTypes.STRING, allowNull: false },
