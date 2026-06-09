@@ -1,0 +1,11 @@
+const express = require('express');
+const router = express.Router();
+const communityController = require('../controllers/communityController');
+const { authMiddleware } = require('../middleware/authMiddleware');
+const { roleMiddleware } = require('../middleware/roleMiddleware');
+router.get('/', communityController.findAll);
+router.get('/active', communityController.findActive);
+router.post('/', authMiddleware, roleMiddleware('admin', 'staff'), communityController.create);
+router.put('/:id', authMiddleware, roleMiddleware('admin', 'staff'), communityController.update);
+router.delete('/:id', authMiddleware, roleMiddleware('admin'), communityController.remove);
+module.exports = router;
