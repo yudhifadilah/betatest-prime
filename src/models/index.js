@@ -19,16 +19,28 @@ const CommunityMember = require("./CommunityMember");
 const StoreSetting = require("./StoreSetting");
 const Tumbal = require("./Tumbal");
 
+const safeBelongsTo = (source, target, options) => {
+  if (!source.associations[options.as]) {
+    source.belongsTo(target, options);
+  }
+};
+
+const safeHasMany = (source, target, options) => {
+  if (!source.associations[options.as]) {
+    source.hasMany(target, options);
+  }
+};
+
 /* =========================
    VILOG
 ========================= */
 
-VilogOrder.belongsTo(VilogProduk, {
+safeBelongsTo(VilogOrder, VilogProduk, {
   foreignKey: "vilogProdukId",
   as: "vilogProduk",
 });
 
-VilogProduk.hasMany(VilogOrder, {
+safeHasMany(VilogProduk, VilogOrder, {
   foreignKey: "vilogProdukId",
   as: "vilogOrders",
 });
@@ -37,12 +49,12 @@ VilogProduk.hasMany(VilogOrder, {
    PAYOUT
 ========================= */
 
-PayoutOrder.belongsTo(PayoutProduk, {
+safeBelongsTo(PayoutOrder, PayoutProduk, {
   foreignKey: "payoutProdukId",
   as: "payoutProduk",
 });
 
-PayoutProduk.hasMany(PayoutOrder, {
+safeHasMany(PayoutProduk, PayoutOrder, {
   foreignKey: "payoutProdukId",
   as: "payoutOrders",
 });
@@ -51,12 +63,12 @@ PayoutProduk.hasMany(PayoutOrder, {
    LIMS
 ========================= */
 
-LimsOrder.belongsTo(LimsProduk, {
+safeBelongsTo(LimsOrder, LimsProduk, {
   foreignKey: "limsProdukId",
   as: "limsProduk",
 });
 
-LimsProduk.hasMany(LimsOrder, {
+safeHasMany(LimsProduk, LimsOrder, {
   foreignKey: "limsProdukId",
   as: "limsOrders",
 });
@@ -65,12 +77,12 @@ LimsProduk.hasMany(LimsOrder, {
    GIFTING
 ========================= */
 
-GiftingOrder.belongsTo(GiftingProduk, {
+safeBelongsTo(GiftingOrder, GiftingProduk, {
   foreignKey: "giftingProdukId",
   as: "giftingProduk",
 });
 
-GiftingProduk.hasMany(GiftingOrder, {
+safeHasMany(GiftingProduk, GiftingOrder, {
   foreignKey: "giftingProdukId",
   as: "giftingOrders",
 });
@@ -79,12 +91,12 @@ GiftingProduk.hasMany(GiftingOrder, {
    REKENING
 ========================= */
 
-User.hasMany(RekeningPembayaran, {
+safeHasMany(User, RekeningPembayaran, {
   foreignKey: "userId",
   as: "rekeningPembayaran",
 });
 
-RekeningPembayaran.belongsTo(User, {
+safeBelongsTo(RekeningPembayaran, User, {
   foreignKey: "userId",
   as: "owner",
 });
@@ -93,12 +105,12 @@ RekeningPembayaran.belongsTo(User, {
    CHAT
 ========================= */
 
-ChatRoom.hasMany(ChatMessage, {
+safeHasMany(ChatRoom, ChatMessage, {
   foreignKey: "roomId",
   as: "messages",
 });
 
-ChatMessage.belongsTo(ChatRoom, {
+safeBelongsTo(ChatMessage, ChatRoom, {
   foreignKey: "roomId",
   as: "room",
 });
@@ -107,13 +119,13 @@ ChatMessage.belongsTo(ChatRoom, {
    COMMUNITY
 ========================= */
 
-RobloxCommunity.hasMany(CommunityMember, {
+safeHasMany(RobloxCommunity, CommunityMember, {
   foreignKey: "groupId",
   sourceKey: "groupId",
   as: "members",
 });
 
-CommunityMember.belongsTo(RobloxCommunity, {
+safeBelongsTo(CommunityMember, RobloxCommunity, {
   foreignKey: "groupId",
   targetKey: "groupId",
   as: "community",
@@ -127,12 +139,12 @@ module.exports = {
   VilogProduk,
   PayoutProduk,
   LimsProduk,
-  giftingProduk,
+  GiftingProduk,
 
   VilogOrder,
   PayoutOrder,
   LimsOrder,
-  GiftingOrder,
+  giftingOrder,
 
   RekeningPembayaran,
 
