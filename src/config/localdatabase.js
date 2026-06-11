@@ -1,5 +1,6 @@
 const { Sequelize } = require("sequelize");
 const mysql2 = require("mysql2");
+
 require("dotenv").config();
 
 const sequelize = new Sequelize(
@@ -15,7 +16,7 @@ const sequelize = new Sequelize(
   }
 );
 
-const connectDB = async () => {
+sequelize.connectDB = async () => {
   try {
     await sequelize.authenticate();
     console.log("Database connected successfully");
@@ -26,12 +27,12 @@ const connectDB = async () => {
 
     console.log("All models synced successfully");
   } catch (error) {
-    console.error("Database connection failed:", error);
+    console.error(
+      "Database connection failed:",
+      error
+    );
     process.exit(1);
   }
 };
 
-module.exports = {
-  sequelize,
-  connectDB,
-};
+module.exports = sequelize;
