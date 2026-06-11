@@ -12,6 +12,16 @@ const LimsOrder = sequelize.define('LimsOrder', {
     type: DataTypes.ENUM('unpaid', 'pending', 'processing', 'completed', 'cancelled'),
     defaultValue: 'unpaid',
   },
+  productName: {
+  type: DataTypes.STRING,
+  allowNull: true,
+},
+
+totalPrice: {
+  type: DataTypes.INTEGER,
+  allowNull: true,
+  defaultValue: 0,
+},
 });
 
 module.exports = LimsOrder;

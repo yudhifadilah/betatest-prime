@@ -45,4 +45,12 @@ router.patch(
   uploadPayment.single("completionProof"),
   vilogOrderController.updateStatus,
 );
+
+router.get(
+  "/orders/:id",
+  authMiddleware,
+  roleMiddleware("admin", "staff"),
+  vilogOrderController.getOrderById
+);
+
 module.exports = router;

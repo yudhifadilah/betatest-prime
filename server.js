@@ -16,8 +16,14 @@ const rekeningRoutes = require("./src/routes/rekeningRoutes");
 const communityRoutes = require("./src/routes/communityRoutes");
 const chatRoutes = require("./src/routes/chatRoutes");
 const tumbalRoutes = require("./src/routes/tumbalRoutes");
+const giftingRoutes = require("./src/routes/giftingRoutesOrder");
 const storeRoutes = require("./src/routes/storeRoutes");
 const checkOrderRoutes = require("./src/routes/checkOrderRoutes");
+const twoFactorRoutes = require("./src/routes/twoFactorRoutes");
+const giftingOrderRoutes = require(
+  "./src/routes/giftingRoutes"
+);
+
 
 const app = express();
 const server = http.createServer(app);
@@ -69,6 +75,9 @@ app.use("/api/chat", chatRoutes);
 app.use("/api/tumbal", tumbalRoutes);
 app.use("/api/store", storeRoutes);
 app.use("/api/check-order", checkOrderRoutes);
+app.use("/api/2fa", twoFactorRoutes);
+app.use("/api/gifting", giftingRoutes);
+app.use("/api/gifting", giftingOrderRoutes);
 
 io.on("connection", (socket) => {
   console.log("User connected:", socket.id);

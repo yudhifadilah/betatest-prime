@@ -369,16 +369,16 @@ exports.createOrder = async (req, res) => {
 
     const paymentProof = req.file ? req.file.path : null;
 
-    const order = await PayoutOrder.create({
-      orderId: makeOrderCode("PAYOUT"),
-      payoutProdukId,
-      robloxUsername,
-      robloxUserId: robloxUser.userId,
-      nomorRekening,
-      paymentProof,
-      isJoinedGroup: true,
-      status: paymentProof ? "pending" : "unpaid",
-    });
+const order = await PayoutOrder.create({
+  orderId: makeOrderCode("PAYOUT"),
+  payoutProdukId,
+  productName: produk.namaProduk,
+  totalPrice: produk.harga,
+  robloxUsername,
+  nomorRekening,
+  paymentProof,
+  status: paymentProof ? "pending" : "unpaid",
+});
 
     res.status(201).json({
       message: "Order payout berhasil dibuat",

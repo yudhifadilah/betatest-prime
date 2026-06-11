@@ -7,6 +7,53 @@ const {
   GiftingOrder,
 } = require("../models");
 
+const getOrderPrice = (order) => {
+  const data = order.toJSON ? order.toJSON() : order;
+
+  return (
+    data.totalPrice ||
+    data.totalHarga ||
+    data.price ||
+    data.harga ||
+    data.amount ||
+    data.total ||
+    data.nominal ||
+    data.productPrice ||
+    data.hargaProduk ||
+    0
+  );
+};
+
+const getProductName = (order, type) => {
+  const data = order.toJSON ? order.toJSON() : order;
+
+  if (type === "gifting") {
+    return data.namaItem || "-";
+  }
+
+  return (
+    data.productName ||
+    data.namaProduk ||
+    data.namaProduct ||
+    data.produkName ||
+    data.namaItem ||
+    "-"
+  );
+};
+
+const getCompletionProof = (order) => {
+  const data = order.toJSON ? order.toJSON() : order;
+
+  return (
+    data.completionProof ||
+    data.proofDone ||
+    data.buktiSelesai ||
+    data.adminProof ||
+    data.completedProof ||
+    null
+  );
+};
+
 exports.checkOrderByOrderId = async (req, res) => {
   try {
     const { orderId } = req.params;
@@ -18,7 +65,14 @@ exports.checkOrderByOrderId = async (req, res) => {
       });
     }
 
-    const cleanOrderId = orderId.trim();
+    const cleanOrderId = String(orderId).trim();
+
+    if (!cleanOrderId) {
+      return res.status(400).json({
+        success: false,
+        message: "Order ID tidak valid",
+      });
+    }
 
     const sources = [
       {
@@ -53,13 +107,26 @@ exports.checkOrderByOrderId = async (req, res) => {
       });
 
       if (order) {
+        const orderData = order.toJSON();
+        const totalPrice = Number(getOrderPrice(orderData)) || 0;
+
         return res.json({
           success: true,
           message: "Transaksi ditemukan",
           productType: source.type,
           data: {
-            ...order.toJSON(),
+            ...orderData,
+
             productType: source.type,
+
+            // Untuk gifting otomatis ambil dari namaItem
+            // Untuk order lain tetap pakai productName / namaProduk
+            productName: getProductName(orderData, source.type),
+
+            totalPrice,
+            totalHarga: totalPrice,
+
+            completionProof: getCompletionProof(orderData),
           },
         });
       }

@@ -12,7 +12,20 @@ const VilogOrder = sequelize.define('VilogOrder', {
   completionProof: {
   type: DataTypes.STRING,
   allowNull: true,
+  
 },
+
+productName: {
+  type: DataTypes.STRING,
+  allowNull: true,
+},
+
+totalPrice: {
+  type: DataTypes.INTEGER,
+  allowNull: true,
+  defaultValue: 0,
+},
+
 completedAt: {
   type: DataTypes.DATE,
   allowNull: true,

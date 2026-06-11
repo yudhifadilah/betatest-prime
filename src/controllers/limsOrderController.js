@@ -20,11 +20,16 @@ exports.createOrder = async (req, res) => {
     if (!produk.isTumbalAvailable) return res.status(400).json({ message: 'Tumbal untuk trade belum tersedia', tumbalTersedia: tumbal });
 
     const paymentProof = req.file ? req.file.path : null;
-    const order = await LimsOrder.create({
-      orderId: makeOrderCode('LIMS'), limsProdukId, robloxUsername, nomorRekening,
-      paymentProof, rolimonsStatus: rolimons.message, tumbalAvailable: true,
-      status: paymentProof ? 'pending' : 'unpaid'
-    });
+ const order = await LimsOrder.create({
+  orderId: makeOrderCode("LIMS"),
+  limsProdukId,
+  productName: produk.namaProduk,
+  totalPrice: produk.harga,
+  robloxUsername,
+  nomorRekening,
+  paymentProof,
+  status: paymentProof ? "pending" : "unpaid",
+});
     res.status(201).json({ message: 'Order LIMS berhasil dibuat', data: order });
   } catch (error) { res.status(500).json({ message: 'Gagal membuat order LIMS', error: error.message }); }
 };

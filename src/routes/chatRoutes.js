@@ -22,4 +22,7 @@ router.post(
   chatController.adminReplyMessage
 );
 
+router.patch("/rooms/:roomId/order", chatController.updateRoomOrderId);
+router.patch("/rooms/:roomId/accept", authMiddleware, chatController.acceptRoom);
+
 module.exports = router;
