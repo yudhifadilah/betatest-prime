@@ -144,7 +144,7 @@ module.exports = {
   VilogOrder,
   PayoutOrder,
   LimsOrder,
-  giftingOrder,
+  GiftingOrder,
 
   RekeningPembayaran,
 
