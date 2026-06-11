@@ -103,7 +103,7 @@ module.exports = {
   PayoutOrder,
   LimsOrder,
   GiftingOrder,
-  GiftingProduk,
+  giftingProduk,
   RekeningPembayaran,
 
   RobloxCommunity,
