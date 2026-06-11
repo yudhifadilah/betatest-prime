@@ -8,15 +8,11 @@ const { roleMiddleware } = require("../middleware/roleMiddleware");
 
 router.get(
   "/",
-  authMiddleware,
-  roleMiddleware("admin", "staff"),
   rekeningController.findAll
 );
 
 router.get(
   "/global",
-  authMiddleware,
-  roleMiddleware("admin", "staff"),
   rekeningController.findAllGlobal
 );
 
