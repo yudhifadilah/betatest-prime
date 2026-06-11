@@ -1,7 +1,7 @@
 const crypto = require("crypto");
 const qrcode = require("qrcode");
 const bcrypt = require("bcrypt");
-const sharp = require("sharp");
+//const sharp = require("sharp");
 const { User } = require("../models");
 
 const getUserId = (req) => req.user?.id || req.user?.userId;
