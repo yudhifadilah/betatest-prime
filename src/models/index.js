@@ -4,7 +4,7 @@ const User = require("./User");
 const VilogProduk = require("./VilogProduk");
 const PayoutProduk = require("./PayoutProduk");
 const LimsProduk = require("./LimsProduk");
-const GiftingProduk = require("./GiftingProduk");
+const GiftingProduk = require("./giftingProduk");
 
 
 const VilogOrder = require("./VilogOrder");
