@@ -19,7 +19,7 @@ const tumbalRoutes = require("./src/routes/tumbalRoutes");
 const giftingRoutes = require("./src/routes/giftingRoutesOrder");
 const storeRoutes = require("./src/routes/storeRoutes");
 const checkOrderRoutes = require("./src/routes/checkOrderRoutes");
-const twoFactorRoutes = require("./src/routes/twoFactorRoutes");
+//const twoFactorRoutes = require("./src/routes/twoFactorRoutes");
 const giftingOrderRoutes = require(
   "./src/routes/giftingRoutes"
 );
@@ -75,7 +75,7 @@ app.use("/api/chat", chatRoutes);
 app.use("/api/tumbal", tumbalRoutes);
 app.use("/api/store", storeRoutes);
 app.use("/api/check-order", checkOrderRoutes);
-app.use("/api/2fa", twoFactorRoutes);
+//app.use("/api/2fa", twoFactorRoutes);
 app.use("/api/gifting", giftingRoutes);
 app.use("/api/gifting", giftingOrderRoutes);
 
